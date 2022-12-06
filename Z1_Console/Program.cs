@@ -27,6 +27,10 @@ namespace Z1_Console
 
                     Console.Write("Введите знаменатель геометрической прогрессии: ");
                     denominator = double.Parse(Console.ReadLine());
+
+
+                    if (denominator == 1.0) throw new Exception("Знаменатель не может быть равен 1!");
+
                     break;
                 }
                 catch (Exception ex)

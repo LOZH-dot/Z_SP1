@@ -28,6 +28,9 @@ namespace Z2_Forms
                 b = double.Parse(SecondSideTextBox.Text);
 
                 c = double.Parse(ThirdSideTextBox.Text);
+
+                if (a <= 0 || b <= 0 || c <= 0) throw new Exception($"Стороны не могут быть меньше или равны нулю!");
+                if (!CheckTriangle(a, b, c)) throw new Exception($"Треугольника со сторонами {a},{b},{c} не существует!");
             }
             catch (Exception ex)
             {
@@ -37,10 +40,18 @@ namespace Z2_Forms
 
             if (a == b && b == c && a == c)
                 MessageBox.Show($"Треугольник является равносторонним!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (a == b || a == c || b == c)
+                MessageBox.Show($"Треугольник является равнобедренным!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show($"Треугольник не является равносторонним!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Треугольние не является ни равносторонним, ни равнобедренным!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
+        }
+
+        private bool CheckTriangle(double a, double b, double c)
+        {
+            if (a < b + c && b < a + c && c < a + b) return true;
+            else return false;
         }
     }
 }

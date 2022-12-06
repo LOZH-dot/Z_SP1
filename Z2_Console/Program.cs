@@ -24,6 +24,9 @@ namespace Z2_Console
 
                     Console.Write("Введите третью сторону треугольника: ");
                     c = double.Parse(Console.ReadLine());
+
+                    if (a <= 0 || b <= 0 || c <= 0) throw new Exception($"Стороны не могут быть меньше или равны нулю!");
+                    if (!CheckTriangle(a, b, c)) throw new Exception($"Треугольника со сторонами {a},{b},{c} не существует!");
                     break;
                 }
                 catch (Exception ex)
@@ -34,8 +37,16 @@ namespace Z2_Console
 
             if (a == b && b == c && a == c)
                 Console.WriteLine("Треугольник является равносторонним!");
+            else if (a == b || a == c || b == c)
+                Console.WriteLine("Треугольник является равнобедренным!");
             else
-                Console.WriteLine("Треугольник не является равносторонним!");
+                Console.WriteLine("Треугольние не является ни равносторонним, ни равнобедренным!");
+        }
+
+        static bool CheckTriangle(double a, double b, double c)
+        {
+            if (a < b + c && b < a + c && c < a + b) return true;
+            else return false;
         }
     }
 }
